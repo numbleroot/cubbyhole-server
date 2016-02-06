@@ -73,7 +73,9 @@ typedef struct {
 } workerArgs;
 
 
+
 /* --- Functions --- */
+
 
 /**
  * Cleans up used data structures and
@@ -99,7 +101,6 @@ void quitHandler() {
 
 /**
  * Print the usage of server executable.
- * Returns failure code.
  */
 void printUsage(char *commandName) {
     printf("Usage: %s [PORT]\n", commandName);
@@ -128,8 +129,9 @@ void sendResponse(int fd, respType TYPE, unsigned int incPayload, unsigned char 
 
 
 /**
- * Awaits command from client and normalizes it
- * means: only upper case letters after this function.
+ * Awaits command from client and normalizes it.
+ * Means: command contains only upper case letters
+ * after this function.
  */
 unsigned char * getCommand(int fd, unsigned char (*req)[MAX_STRING], unsigned char (*tmpReq)[MAX_STRING]) {
 
@@ -144,10 +146,13 @@ unsigned char * getCommand(int fd, unsigned char (*req)[MAX_STRING], unsigned ch
 
     u = 0;
 
-    /* Turn request into upper case only mode. */
     for(i = 0; (*tmpReq)[i]; i++) {
 
-        /* Copy to real command if not a control character (newline, carriage return). */
+        /**
+         * Turn request into upper case only mode.
+         * Copy to real command if not a control character
+         * (newline, carriage return).
+         */
         if(((*tmpReq)[i] != 10) && ((*tmpReq)[i] != 13)) {
             (*req)[u] = toupper((*tmpReq)[i]);
             u++;
@@ -377,6 +382,7 @@ void * handleRequests(void *args) {
 
 /* --- Main --- */
 
+
 /**
  * Parse arguments, open up a TCP socket, listen for
  * requests, respond according to cubbyhole protocol
@@ -428,7 +434,11 @@ int main(int argc, char **argv) {
     pthread_mutex_unlock(&cubbyLock);
 
 
-    /* Catch for too few input parameters. Two required. */
+    /**
+     * Catch for too few input parameters.
+     * Two required, last one being port to run on.
+     * Returns failure code.
+     */
     if(argc != 2) {
         printUsage(argv[0]);
 
