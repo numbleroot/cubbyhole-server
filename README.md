@@ -59,6 +59,7 @@ This leads to a state diagram of the server cubbyhole that might look like this 
 Of course I am not the only student in that class, so here is a probably incomplete list of implementations of my fellow students:
 
 * [cubbyhole](https://github.com/MetalMatze/cubbyhole) by [MetalMatze](https://github.com/MetalMatze) - [Go](https://golang.org/)
+* [cubbyhole](https://github.com/KjellPirschel/cubbyhole) by [KjellPirschel](https://github.com/KjellPirschel) - C
 
 ## License
 
